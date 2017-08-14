@@ -71,14 +71,14 @@ int main(int argc, char *argv[])
       }
     }
     else{
-      if(argc>6){	
+      if(argc>6){
 	printf("Extra parameters exist in input\n");	
 	usage(1);
       }
       else break;	 	
     }   
   }
-  if(argc==5){	
+  if(argc==5){
     if(sscanf(*argv,"%s",str) != 1){
       printf("Incorrect arguments\n");
       usage(1);
@@ -167,9 +167,9 @@ int main(int argc, char *argv[])
     }
   }
   if(vbs>=1)printf("File directory: %s\n",dirname);
-      
+
 
   if(ndir==1)printf("%s: gl=%8.3f gb=%8.3f DM=%8.2f", p, gl, gb, dordm);
   else printf("%s: gl=%8.3f gb=%8.3f Dist=%9.1f", p, gl, gb, dordm);
-  dmdtau(gl, gb, dordm, DM_Host, ndir, np, vbs, dirname, text); 
+  dmdtau(gl, gb, dordm, DM_Host, ndir, np, vbs, dirname, text);
 }
