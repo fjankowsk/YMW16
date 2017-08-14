@@ -16,9 +16,6 @@ import subprocess
 import numpy as np
 from cStringIO import StringIO
 
-# set up logging
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-
 
 def get_ymw16_output(gl, gb, dm):
     """
@@ -54,6 +51,9 @@ def get_ymw16_output(gl, gb, dm):
 #
 
 def main():
+    # set up logging
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
     # handle command line arguments
     parser = argparse.ArgumentParser(description="Get output from YMW16 model.")
     parser.add_argument("gl", type=float,
