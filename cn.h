@@ -110,7 +110,7 @@ struct SMC
   double nsmc;
 };
 int ymw16par(struct Warp_Sun *t0, struct Thick *t1, struct Thin *t2,  struct Spiral *t3, struct GC *t4, struct Gum *t5, struct LB *t6, struct LI *t7, struct FB *t8, struct LMC *t9, struct Dora *t10, struct SMC *t11, char *dirname);
-void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np, int vbs, char *dirname, char *text);
+void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np, int vbs, char *dirname, char *text, int mr);
 void thick(double xx, double yy, double zz, double *gd, double *ne1, double rr, struct Thick t1);
 void thin(double xx, double yy, double zz, double gd, double *ne2, double rr, struct Thin t2);
 void spiral(double xx, double yy, double zz, double gd, double *ne3, double rr, struct Spiral t3, char *dirname);

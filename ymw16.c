@@ -10,6 +10,7 @@ void usage(int status)
   printf("-d <dirname>, where <dirname> is a directory containing YMW16 data files\n");
   printf("-v prints diagnostics\n");
   printf("-V prints more diagnostics\n");
+  printf("-o output machine-readable data (semicolon separated values)\n");
   printf("<mode> is Gal, MC, or IGM\n");
   printf("gl, gb in deg, DM in cm^-3 pc, Dist in pc (Gal, MC) or Mpc (IGM)\n");
   printf("DM_Host is the contribution of the FRB host galaxy to the observed DM\n");
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
   double DM_Host=0;
   int ndir, np;
   int vbs=0;
+  int mr=0;
   char dirname[64]="NULL",text[64]="";
 
   char str[5];
@@ -65,6 +67,9 @@ int main(int argc, char *argv[])
 	break;
       case 'V':
 	vbs=2;
+	break;
+      case 'o':
+	mr=1;
 	break;
       default:
 	usage(1);
@@ -169,7 +174,14 @@ int main(int argc, char *argv[])
   if(vbs>=1)printf("File directory: %s\n",dirname);
 
 
-  if(ndir==1)printf("%s: gl=%8.3f gb=%8.3f DM=%8.2f", p, gl, gb, dordm);
-  else printf("%s: gl=%8.3f gb=%8.3f Dist=%9.1f", p, gl, gb, dordm);
-  dmdtau(gl, gb, dordm, DM_Host, ndir, np, vbs, dirname, text);
+  // switch between machine-readable and normal output
+  if (mr==1) {
+    if(ndir==1)printf("%s;%.3f;%.3f;%.2f;", p, gl, gb, dordm);
+    else printf("%s;%.3f;%.3f;%.1f;", p, gl, gb, dordm);
+    dmdtau(gl, gb, dordm, DM_Host, ndir, np, vbs, dirname, text, mr);
+  } else {
+    if(ndir==1)printf("%s: gl=%8.3f gb=%8.3f DM=%8.2f", p, gl, gb, dordm);
+    else printf("%s: gl=%8.3f gb=%8.3f Dist=%9.1f", p, gl, gb, dordm);
+    dmdtau(gl, gb, dordm, DM_Host, ndir, np, vbs, dirname, text, mr);
+  }
 }

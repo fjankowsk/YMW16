@@ -2,7 +2,7 @@
 double tsc(double dm){
   return 4.1e-11*pow(dm, 2.2)*(1+0.00194*dm*dm);
 }
-void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np, int vbs, char *dirname, char *text)
+void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np, int vbs, char *dirname, char *text, int mr)
 {
   double ne0=0;
   double ne=0;
@@ -232,8 +232,13 @@ void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np
 	    tau_MC_sc=MAX(tau_Gal, tau_MC);
 	    printf(" DM_MC:%8.2f",DM_MC);
 	  }   
-	  if(np==0)printf(" Dist:%9.1f log(tau_sc):%7.3f %s\n",dist, log10(tau_MC_sc),text);
-	  if(np==1)printf(" DM_Gal:%8.2f Dist:%9.1f log(tau_sc):%7.3f %s\n", dmm, dist,log10(tau_sc),text);
+          if (mr==1) {
+	    if(np==0)printf("%.1f;%.3f;%s\n", dist, log10(tau_MC_sc), text);
+	    if(np==1)printf("%.2f;%.1f;%.3f;%s\n", dmm, dist,log10(tau_sc),text);
+          } else {
+	    if(np==0)printf(" Dist:%9.1f log(tau_sc):%7.3f %s\n",dist, log10(tau_MC_sc),text);
+	    if(np==1)printf(" DM_Gal:%8.2f Dist:%9.1f log(tau_sc):%7.3f %s\n", dmm, dist,log10(tau_sc),text);
+          }
 	}	    
         if(vbs>=2){
 	  printf("dmm=%lf\n", dmm);
@@ -255,8 +260,13 @@ void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np
           }  
           printf(" DM_MC:%8.2f", DM_MC);
         }
-	if(np==0)printf(" Dist:%9.1f log(tau_sc):%7.3f %s\n",dist,log10(tau_MC_sc),text);
-	if(np==1)printf(" DM_Gal:%8.2f Dist:%9.1f log(tau_sc):%7.3f %s\n", dm, dist,log10(tau_sc),text);
+        if (mr==1) {
+	  if(np==0)printf("%.1f;%.3f;%s\n",dist,log10(tau_MC_sc),text);
+	  if(np==1)printf("%.2f;%.1f;%.3f;%s\n", dm, dist,log10(tau_sc),text);
+        } else {
+	  if(np==0)printf(" Dist:%9.1f log(tau_sc):%7.3f %s\n",dist,log10(tau_MC_sc),text);
+	  if(np==1)printf(" DM_Gal:%8.2f Dist:%9.1f log(tau_sc):%7.3f %s\n", dm, dist,log10(tau_sc),text);
+        }
 	break;
       }
     }
@@ -341,8 +351,13 @@ void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np
           }
           tau_sc=tsc(dmpsr);
           tau_MC_sc=MAX(tau_Gal, tau_MC);
-          if(np==0)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr,log10(tau_MC_sc),text);
-          if(np==1)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr, log10(tau_sc),text);
+          if (mr==1) {
+            if(np==0)printf("%.2f;%.3f;%s\n", dmpsr,log10(tau_MC_sc),text);
+            if(np==1)printf("%.2f;%.3f;%s\n", dmpsr, log10(tau_sc),text);
+          } else {
+            if(np==0)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr,log10(tau_MC_sc),text);
+            if(np==1)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr, log10(tau_sc),text);
+          }
         }
 	
 	if(i==nk&&np==-1){
@@ -371,8 +386,13 @@ void dmdtau(double gl, double gb ,double dordm, double DM_Host, int ndir, int np
 	  printf(" DM_MC:%8.2f", DM_MC);
 	}
 	tau_sc=tsc(dmpsr);
-	if(np==0)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr,log10(tau_MC_sc),text);
-	if(np==1)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr, log10(tau_sc),text);
+        if (mr==1) {
+	  if(np==0)printf("%.2f;%.3f;%s\n", dmpsr,log10(tau_MC_sc),text);
+	  if(np==1)printf("%.2f;%.3f;%s\n", dmpsr, log10(tau_sc),text);
+        } else {
+	  if(np==0)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr,log10(tau_MC_sc),text);
+	  if(np==1)printf(" DM:%8.2f log(tau_sc):%7.3f %s\n", dmpsr, log10(tau_sc),text);
+        }
 	break;
       }
     }    
