@@ -1,3 +1,5 @@
 # binaries and input files
 ymw16
 ymw16.dSYM/
+# python bytecode files
+*.pyc
