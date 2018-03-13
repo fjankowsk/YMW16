@@ -14,7 +14,7 @@ import argparse
 import shlex
 import subprocess
 import numpy as np
-from cStringIO import StringIO
+from io import BytesIO
 
 
 def get_ymw16_output(gl, gb, dm):
@@ -35,7 +35,7 @@ def get_ymw16_output(gl, gb, dm):
     ("dist","float"),
     ("taus","float")]
 
-    f = StringIO(resultstr)
+    f = BytesIO(resultstr)
     data = np.genfromtxt(f, delimiter=";", dtype=dtype)
 
     # convert to kpc
@@ -68,9 +68,9 @@ def main():
     data = get_ymw16_output(args.gl, args.gb, args.dm)
 
     for field in data.dtype.names:
-	print "{0:10} {1:8}".format(field, data[field])
+        print("{0:10} {1:8}".format(field, data[field]))
 
-    print "All done."
+    print("All done.")
 
 
 # if run directly
