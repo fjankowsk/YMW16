@@ -29,26 +29,32 @@ def get_ymw16_output(gl, gb, dm):
 
     resultstr = subprocess.check_output(args)
 
-    dtype = [("mode","|S8"),
-    ("gl","float"), ("gb","float"),
-    ("dm","float"), ("dm_gal","float"),
-    ("dist","float"),
-    ("taus","float")]
+    dtype = [
+        ("mode", "|S8"),
+        ("gl", "float"),
+        ("gb", "float"),
+        ("dm", "float"),
+        ("dm_gal", "float"),
+        ("dist", "float"),
+        ("taus", "float"),
+    ]
 
     f = BytesIO(resultstr)
     data = np.genfromtxt(f, delimiter=";", dtype=dtype)
 
     # convert to kpc
-    data["dist"] = 1E-3 * data["dist"]
+    data["dist"] = 1e-3 * data["dist"]
 
     # convert taus
-    data["taus"] = 10**data["taus"]
+    data["taus"] = 10 ** data["taus"]
 
     return data
+
 
 #
 # MAIN
 #
+
 
 def main():
     # set up logging
@@ -56,10 +62,8 @@ def main():
 
     # handle command line arguments
     parser = argparse.ArgumentParser(description="Get output from YMW16 model.")
-    parser.add_argument("gl", type=float,
-    help="Galactic latitude of object [deg].")
-    parser.add_argument("gb", type=float,
-    help="Galactic longitude of object [deg].")
+    parser.add_argument("gl", type=float, help="Galactic latitude of object [deg].")
+    parser.add_argument("gb", type=float, help="Galactic longitude of object [deg].")
     parser.add_argument("dm", type=float, help="DM of object [pc/cm3].")
     parser.add_argument("--version", action="version", version=__version__)
 
@@ -76,4 +80,3 @@ def main():
 # if run directly
 if __name__ == "__main__":
     main()
-
