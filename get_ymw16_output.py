@@ -1,13 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
-#   $Id$
 #   2017 Fabian Jankowski
 #   Get output from YMW16 model.
 #
-
-# version info
-__version__ = "$Revision$"
 
 import logging
 import argparse
@@ -62,10 +56,13 @@ def main():
 
     # handle command line arguments
     parser = argparse.ArgumentParser(description="Get output from YMW16 model.")
-    parser.add_argument("gl", type=float, help="Galactic latitude of object [deg].")
-    parser.add_argument("gb", type=float, help="Galactic longitude of object [deg].")
-    parser.add_argument("dm", type=float, help="DM of object [pc/cm3].")
-    parser.add_argument("--version", action="version", version=__version__)
+    parser.add_argument(
+        "gl", type=float, help="Galactic latitude of object in degrees."
+    )
+    parser.add_argument(
+        "gb", type=float, help="Galactic longitude of object in degrees."
+    )
+    parser.add_argument("dm", type=float, help="DM of object in pc/cm3.")
 
     args = parser.parse_args()
 
@@ -77,6 +74,5 @@ def main():
     print("All done.")
 
 
-# if run directly
 if __name__ == "__main__":
     main()
